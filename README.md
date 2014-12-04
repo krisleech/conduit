@@ -76,7 +76,7 @@ It is up to you what you store in the `data` hash it might include details about
 
 An entity can be reconstructed from the events:
 
-```
+```ruby
 class Person
   include Virtus
   
