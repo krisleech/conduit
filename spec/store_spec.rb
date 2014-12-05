@@ -39,6 +39,10 @@ describe 'Conduit::Store' do
     it 'returns all events' do
       is(store.all.size) == 4
     end
+
+    it 'returns Event objects' do
+      is(store.all.first).is_a?(Conduit::Event)
+    end
   end
 
   it 'is enumerable' do

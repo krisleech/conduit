@@ -13,15 +13,21 @@ module Conduit
     end
 
     def get(aggregate_id:)
-      @persistence.get(aggregate_id: aggregate_id).map { |attributes| Event.new(attributes) }
+      to_events @persistence.get(aggregate_id: aggregate_id)
     end
 
     def all
-      @persistence.all
+      to_events @persistence.all
     end
 
     def count
       @persistence.count
+    end
+
+    private
+
+    def to_events(records)
+      records.map { |record| Event.new(record) }
     end
   end
 end
