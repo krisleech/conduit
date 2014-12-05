@@ -193,6 +193,12 @@ end
 
 This could even happen continually in a seperate process, in which case there is no need to subscribe any projections (but it might be better for development/debugging purposes).
 
+## Development
+
+```
+minispec
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/conduit/fork )
