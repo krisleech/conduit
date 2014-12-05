@@ -4,12 +4,14 @@ module Conduit
   class Store
     include Lupo.enumerable(:persistence)
 
-    def initialize(persistence)
+    # TODO: use named arguments
+    def initialize(persistence, clock = Time)
       @persistence = persistence
+      @clock       = clock
     end
 
     def put(name:, aggregate_id:, data: {})
-      @persistence.put(name: name, aggregate_id: aggregate_id, data: data)
+      @persistence.put(name: name, aggregate_id: aggregate_id, data: data, recorded_at: @clock.now)
     end
 
     def get(aggregate_id:)

@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'Conduit::Store' do
   let(:persistence) { Conduit::Persistence::InMemory.new }
-  let(:store)       { Conduit::Store.new(persistence) }
+  let(:clock)       { double('Time', now: Time.now) }
+  let(:store)       { Conduit::Store.new(persistence, clock) }
 
   before do
     put_event(aggregate_id: 1)
@@ -16,6 +17,11 @@ describe 'Conduit::Store' do
       is(store.get(aggregate_id: 1).size) == 2
       is(store.get(aggregate_id: 2).size) == 1
       is(store.get(aggregate_id: 3).size) == 1
+    end
+
+    it 'records the current time' do
+      first_event = store.get(aggregate_id: 1).first
+      is(first_event.recorded_at) == clock.now
     end
   end
 

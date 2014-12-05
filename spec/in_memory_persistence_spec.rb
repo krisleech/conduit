@@ -36,10 +36,10 @@ describe 'Conduit::Persistence::InMemory' do
         expect(persistence.get(aggregate_id: 3).size).to == 1
       end
 
-      it 'returns collection of hashes with name, aggregate_id and data keys' do
+      it 'returns collection of hashes with all keys' do
         first_event = persistence.get(aggregate_id: 1).first
         expect(first_event).is_a?(Hash)
-        %i(name aggregate_id data).each do |key|
+        %i(name aggregate_id data recorded_at).each do |key|
           expect(first_event).has_key?(key)
         end
       end
@@ -48,7 +48,8 @@ describe 'Conduit::Persistence::InMemory' do
     def put_event(aggregate_id:)
       persistence.put(name:         :thing_created,
                       aggregate_id: aggregate_id,
-                      data:         { id: 1, name: 'Kris Leech' })
+                      data:         { id: 1, name: 'Kris Leech' },
+                      recorded_at:  Time.now)
     end
   end
 end
