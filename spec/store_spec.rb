@@ -29,6 +29,10 @@ describe 'Conduit::Store' do
     it 'returns an empty collection when aggregate_id has no events' do
       is(store.get(aggregate_id: 999)).empty?
     end
+
+    it 'returns Event objects' do
+      is(store.get(aggregate_id: 1).first).is_a?(Conduit::Event)
+    end
   end
 
   describe '#all' do
@@ -39,7 +43,7 @@ describe 'Conduit::Store' do
 
   it 'is enumerable' do
     %w(map reduce select reject).each do |method|
-      store.respond_to?(method)
+      assert(store).respond_to?(method)
     end
   end
 

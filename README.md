@@ -52,7 +52,7 @@ class RegisterPerson
     return false unless form.valid?
         
     id = SecureRandom.uuid    
-    $store.write(:person_registered, id, form.attributes)
+    $store.put(:person_registered, id, form.attributes)
   end  
 end
 ```
@@ -62,7 +62,7 @@ Events are always named in the past tense. It might seem odd to say something is
 ## Reading a stream of events
 
 ```ruby
-events = $store.read(uuid)
+events = $store.get(id)
 
 first_event = events[0]
 

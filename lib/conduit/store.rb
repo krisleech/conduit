@@ -1,5 +1,9 @@
+require 'lupo'
+
 module Conduit
   class Store
+    include Lupo.enumerable(:persistence)
+
     def initialize(persistence)
       @persistence = persistence
     end
@@ -9,7 +13,7 @@ module Conduit
     end
 
     def get(aggregate_id:)
-      @persistence.get(aggregate_id: aggregate_id)
+      @persistence.get(aggregate_id: aggregate_id).map { |attributes| Event.new(attributes) }
     end
 
     def all

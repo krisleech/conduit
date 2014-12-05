@@ -7,7 +7,7 @@ module Conduit
 
       def put(name: , aggregate_id:, data: {})
         @data[aggregate_id] ||= []
-        @data[aggregate_id] << Object.new
+        @data[aggregate_id].push({ name: name, aggregate_id: aggregate_id, data: data })
       end
 
       def get(aggregate_id:)
