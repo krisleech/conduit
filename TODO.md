@@ -16,6 +16,10 @@ and Sidekiq/RabbitMQ for projections.
 
 ----
 
+Add `since` option to #get to filter events by date
+
+----
+
 Allow event store to, optionally, be to called async (Actor) using Celluloid.
 Becomes fire and forget.
 
