@@ -52,8 +52,9 @@ describe 'Conduit::Store' do
   end
 
   it 'is enumerable' do
-    %w(map reduce select reject).each do |method|
-      assert(store).respond_to?(method)
+    # reduce is not included as it returns nil
+    %w(each map select reject).each do |method|
+      assert(store.public_send(method)).is_a?(Enumerator)
     end
   end
 

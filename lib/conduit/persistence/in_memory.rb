@@ -1,6 +1,10 @@
+require 'lupo'
+
 module Conduit
   module Persistence
     class InMemory
+      include Lupo.enumerable(:all)
+
       def initialize
         @data = {}
       end

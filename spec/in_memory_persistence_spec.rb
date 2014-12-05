@@ -9,6 +9,13 @@ describe 'Conduit::Persistence::InMemory' do
     end
   end
 
+  it 'is enumerable' do
+    # reduce is not included as it returns nil
+    %w(each map select reject).each do |method|
+      assert(persistence.public_send(method)).is_a?(Enumerator)
+    end
+  end
+
   context 'events exist' do
     before do
       put_event(aggregate_id: 1)
