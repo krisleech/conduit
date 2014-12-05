@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Conduit::Event' do
   describe '#new' do
-    it 'initializes from given hash of attributes' do
+    it 'initializes from hash of attributes' do
       now   = Time.now
       event = Conduit::Event.new({ name: 'person_created', aggregate_id: 1, data: { foo: 'bar' }, recorded_at: now })
 
