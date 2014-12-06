@@ -62,6 +62,29 @@ describe 'Conduit::Store' do
     end
   end
 
+  # FIXME: put in diff. file or have seed data only created in a "with events"
+  # context.
+  describe '#subscribe' do
+    it 'subscribes listener to on_event event' do
+      listener = double('Listener')
+      expect(listener).to_receive(:on_event).with do |argument|
+        expect(argument).is_a?(Event)
+      end
+      store.subscribe(listener, prefix: 'on')
+      store.put(name: 'example', aggregate_id: 1)
+
+    end
+
+    it 'subscribes listener to on_XXX event' do
+      listener = double('Listener')
+      expect(listener).to_receive(:on_person_created).with do |argument|
+        expect(argument).is_a?(Event)
+      end
+      store.subscribe(listener, prefix: 'on')
+      store.put(name: 'person_created', aggregate_id: 1)
+    end
+  end
+
   def put_event(aggregate_id:)
     store.put(name: :person_created,
               aggregate_id: aggregate_id,

@@ -1,7 +1,9 @@
+require 'wisper'
 require 'lupo'
 
 module Conduit
   class Store
+    include Wisper.publisher
     include Lupo.enumerable(:persistence)
 
     # TODO: use named arguments

@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "lupo"
   spec.add_dependency "anima"
+  spec.add_dependency "wisper"
 end
