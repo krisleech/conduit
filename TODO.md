@@ -16,10 +16,6 @@ and Sidekiq/RabbitMQ for projections.
 
 ----
 
-Add `since` option to #get to filter events by date
-
-----
-
 Allow event store to, optionally, be to called async (Actor) using Celluloid.
 Becomes fire and forget.
 
@@ -30,7 +26,12 @@ Add error handling for failures in store#put -> allow a block to be called.
 ----
 
 Add Mongo persistence
+or Redis
 
 ----
 
 Add configuration for persistence, e.g. URL, user, pass
+
+----
+
+
