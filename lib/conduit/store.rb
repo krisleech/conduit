@@ -14,8 +14,8 @@ module Conduit
       @persistence.put(name: name, aggregate_id: aggregate_id, data: data, recorded_at: @clock.now)
     end
 
-    def get(aggregate_id:)
-      to_events @persistence.get(aggregate_id: aggregate_id)
+    def get(aggregate_id:, since: nil)
+      to_events @persistence.get(aggregate_id: aggregate_id, since: since)
     end
 
     def all

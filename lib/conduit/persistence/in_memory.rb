@@ -14,8 +14,10 @@ module Conduit
         @data[aggregate_id].push({ name: name, aggregate_id: aggregate_id, data: data, recorded_at: recorded_at })
       end
 
-      def get(aggregate_id:)
-        @data.fetch(aggregate_id, [])
+      def get(aggregate_id:, since: nil)
+        results = @data.fetch(aggregate_id, [])
+        results = results.select { |datum| datum[:recorded_at] > since } if since
+        results
       end
 
       def all
