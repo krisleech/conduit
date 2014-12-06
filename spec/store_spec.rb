@@ -23,6 +23,10 @@ describe 'Conduit::Store' do
       first_event = store.get(aggregate_id: 1).first
       is(first_event.recorded_at) == clock.now
     end
+
+    it 'returns an Event object' do
+      expect(store.put(name: 'example', aggregate_id: 1)).is_a?(Conduit::Event)
+    end
   end
 
   describe '#get' do

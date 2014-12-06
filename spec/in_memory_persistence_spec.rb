@@ -36,6 +36,14 @@ describe 'Conduit::Persistence::InMemory' do
         expect(persistence.get(aggregate_id: 2).size).to == 1
         expect(persistence.get(aggregate_id: 3).size).to == 1
       end
+
+      it 'returns a Hash with expected keys' do
+        result = persistence.put(name: 'example', aggregate_id: 1, recorded_at: Time.now)
+        is(result).is_a?(Hash)
+        %i(name aggregate_id data recorded_at).each do |key|
+          expect(result).has_key?(key)
+        end
+      end
     end
 
     describe '#get' do

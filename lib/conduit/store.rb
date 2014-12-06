@@ -11,7 +11,7 @@ module Conduit
     end
 
     def put(name:, aggregate_id:, data: {})
-      @persistence.put(name: name, aggregate_id: aggregate_id, data: data, recorded_at: @clock.now)
+      to_event @persistence.put(name: name, aggregate_id: aggregate_id, data: data, recorded_at: @clock.now)
     end
 
     def get(aggregate_id:, since: nil)
@@ -29,7 +29,11 @@ module Conduit
     private
 
     def to_events(records)
-      records.map { |record| Event.new(record) }
+      records.map { |record| to_event(record) }
+    end
+
+    def to_event(record)
+      Event.new(record)
     end
   end
 end
